@@ -1,7 +1,7 @@
 <template>
   <div id="input">
     <input v-model="message">
-    <button @click="submit(message)" name="submit" type="button">제출</button>
+    <button @click="submit()" name="submit" type="button">제출</button>
     <button @click="alarm(message)" name="alarm" type="button">알림</button>
     <p>{{ message }}</p>
   </div>
@@ -13,14 +13,18 @@ export default {
   data() {
     return {
       message: '',
+      count: 0,
     };
   },
   methods: {
-    submit(message) {
-      return message;
+    submit() {
+      const n = this.message.length;
+      this.message = this.message.slice(1, n) + this.message.slice(0, 1);
+      return this.message;
     },
     alarm(message) {
-      alert(message);
+      this.count += 1;
+      alert(message + this.count);
     },
   },
 };
