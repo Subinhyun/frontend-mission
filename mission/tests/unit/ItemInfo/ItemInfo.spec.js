@@ -21,3 +21,20 @@ describe('ItemInfoPage', () => {
   });
 
 });
+
+describe('Seller information', () => {
+  it('show seller information', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      seller: {
+        name: 'name',
+        tag: ['tag'],
+      }
+    });
+
+    expect(wrapper.find('[data-test="seller-image"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test="seller-name"]').text()).toEqual('name');
+    expect(wrapper.find('[data-test="seller-tag"]').text()).toEqual('#tag');
+  })
+});
