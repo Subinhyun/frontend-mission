@@ -19,11 +19,6 @@ describe('ItemInfoPage', () => {
   it('show product image', () => {
     expect(wrapper.find('[data-test="main-Image"]').exists()).toBe(true);
   });
-
-  it('renders buy button', () => {
-    expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);
-  });
-
 });
 
 describe('Seller information', () => {
@@ -51,12 +46,17 @@ describe('Product information', () => {
       product: {
         title: 'title',
         sale: 34,
-        price: 20000,
+        price: 120000,
       }
     });
 
     expect(wrapper.find('[data-test="product-name"]').text()).toEqual('title');
     expect(wrapper.find('[data-test="product-sale"]').text()).toEqual('34%');
+    expect(wrapper.find('[data-test="discount-price"]').text()).toEqual('79200원');
+    expect(wrapper.find('[data-test="product-price"]').text()).toEqual('120000원');
+
+    expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test="buy-btn"]').text()).toEqual('79200원 구매');
   })
 });
 

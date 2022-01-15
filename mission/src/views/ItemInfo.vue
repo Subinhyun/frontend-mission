@@ -21,8 +21,10 @@
     <div id="product-info">
       <h1 data-test="product-name">{{ product.title }}</h1>
       <span data-test="product-sale" v-if="product.sale > 0">{{ product.sale }}% </span>
-      <span data-test="product-price" v-if="product.sale > 0">{{ product.price }}</span>
-      <span data-test="product-price">{{ product.price }}</span>
+      <span data-test="discount-price" v-if="product.sale > 0">
+        {{ calSale }}원
+      </span>
+      <span data-test="product-price">{{ product.price }}원</span>
     </div>
     <div id="Detail">
       <h3>상품 정보</h3>
@@ -41,7 +43,7 @@
     </div>
   </div>
   <div class="buy">
-    <button id="buy-btn" data-test="buy-btn" >{{ product.price }}원 구매</button>
+    <button id="buy-btn" data-test="buy-btn" >{{ calSale }}원 구매</button>
   </div>
 </div>
 </template>
@@ -83,11 +85,15 @@ export default {
   },
   methods: {
     secretId(id) {
-      this.product.id = id.slice(0, 2) + '*'.repeat(id.length / 2);
+      return id.slice(0, 2) + '*'.repeat(id.length / 2);
     },
   },
   computed: {
-
+    calSale() {
+      const discount = Math.round(this.product.price * (this.product.sale / 100));
+      const totalPrice = this.product.price - discount;
+      return totalPrice;
+    },
   },
 };
 </script>
@@ -203,7 +209,7 @@ export default {
   color: white;
   border-radius: 8px;
   font-size: 30px;
-  padding: 10px auto;
+  padding: 20px auto;
 }
 
 </style>
