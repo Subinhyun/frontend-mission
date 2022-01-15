@@ -49,14 +49,14 @@ describe('Product information', () => {
 
     await wrapper.setData({
       product: {
-        name: 'name',
+        title: 'title',
         sale: 34,
         price: 20000,
       }
     });
 
-    expect(wrapper.find('[data-test="product-name"]').text()).toEqual('name');
-    expect(wrapper.find('[data-test="product-sale"]').text()).toEqual('34');
+    expect(wrapper.find('[data-test="product-name"]').text()).toEqual('title');
+    expect(wrapper.find('[data-test="product-sale"]').text()).toEqual('34%');
   })
 });
 
@@ -65,15 +65,17 @@ describe('review', () => {
     const wrapper = mount(ItemInfoPage);
 
     await wrapper.setData({
-      review: {
-        id: 'review',
-        date: 'date',
-        title: 'title',
-        content: 'content'
-      }
+      review: [
+        {
+          id: 'review',
+          date: 'date',
+          title: 'title',
+          content: 'content'
+        },
+      ],
     });
 
-    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('id');
+    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('review');
     expect(wrapper.find('[data-test="review-date"]').text()).toEqual('date');
     expect(wrapper.find('[data-test="review-title"]').text()).toEqual('title');
     expect(wrapper.find('[data-test="review-content"]').text()).toEqual('content');
