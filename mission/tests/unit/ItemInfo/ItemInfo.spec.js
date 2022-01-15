@@ -20,6 +20,10 @@ describe('ItemInfoPage', () => {
     expect(wrapper.find('[data-test="main-Image"]').exists()).toBe(true);
   });
 
+  it('renders buy button', () => {
+    expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);
+  });
+
 });
 
 describe('Seller information', () => {
@@ -36,5 +40,42 @@ describe('Seller information', () => {
     expect(wrapper.find('[data-test="seller-image"]').exists()).toBe(true);
     expect(wrapper.find('[data-test="seller-name"]').text()).toEqual('name');
     expect(wrapper.find('[data-test="seller-tag"]').text()).toEqual('#tag');
+  })
+});
+
+describe('Product information', () => {
+  it('show product information', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      product: {
+        name: 'name',
+        sale: 34,
+        price: 20000,
+      }
+    });
+
+    expect(wrapper.find('[data-test="product-name"]').text()).toEqual('name');
+    expect(wrapper.find('[data-test="product-sale"]').text()).toEqual('34');
+  })
+});
+
+describe('review', () => {
+  it('show review', async () => {
+    const wrapper = mount(ItemInfoPage);
+
+    await wrapper.setData({
+      review: {
+        id: 'review',
+        date: 'date',
+        title: 'title',
+        content: 'content'
+      }
+    });
+
+    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('id');
+    expect(wrapper.find('[data-test="review-date"]').text()).toEqual('date');
+    expect(wrapper.find('[data-test="review-title"]').text()).toEqual('title');
+    expect(wrapper.find('[data-test="review-content"]').text()).toEqual('content');
   })
 });
