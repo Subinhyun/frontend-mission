@@ -28,7 +28,7 @@
       <span id="product-sale-price" data-test="discount-price" v-if="product.sale > 0">
         {{ calSale }}원
       </span>
-      <span data-test="product-price" class="product-price" >
+      <span data-test="product-price" :class="{productPrice: product.sale > 0}">
         {{ product.price.toLocaleString() }}원
       </span>
     </div>
@@ -48,8 +48,8 @@
       <img v-if="review.img !== null" class="review-img" :src="value.img">
       <span id="review-title" data-test="review-title">{{ value.title }}</span><br>
       <span data-test="review-content">{{ value.content }}</span>
-      <p v-if="review == null">리뷰가 없습니다.</p>
     </div>
+    <p v-if="review == null">리뷰가 없습니다.</p>
   </div>
   <div class="buy">
     <hr>
@@ -228,6 +228,7 @@ span {
 
 #product-sale {
   font-size: 25px;
+  font-weight: bold;
   color: red;
 }
 
@@ -235,7 +236,7 @@ span {
   font-size: 20px;
 }
 
-.product-price {
+.productPrice {
   text-decoration : line-through;
 }
 
