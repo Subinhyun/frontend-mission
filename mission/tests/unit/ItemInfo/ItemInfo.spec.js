@@ -77,7 +77,7 @@ describe('ItemInfoPage', () => {
       ],
     });
 
-    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('re***');
+    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('re****');
     expect(wrapper.find('[data-test="review-date"]').text()).toEqual('date');
     expect(wrapper.find('[data-test="review-title"]').text()).toEqual('title');
     expect(wrapper.find('[data-test="review-content"]').text()).toEqual('content');
