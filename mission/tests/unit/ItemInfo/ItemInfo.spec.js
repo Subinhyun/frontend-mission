@@ -61,16 +61,11 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.find('[data-test="product-name"]').text()).toEqual('title');
     expect(wrapper.find('[data-test="product-sale"]').text()).toEqual('34%');
-    expect(wrapper.find('[data-test="discount-price"]').text()).toEqual('79200원');
-    expect(wrapper.find('[data-test="product-price"]').text()).toEqual('120000원');
-
-    expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);
-    expect(wrapper.find('[data-test="buy-btn"]').text()).toEqual('79200원 구매');
+    expect(wrapper.find('[data-test="discount-price"]').text()).toEqual('79,200원');
+    expect(wrapper.find('[data-test="product-price"]').text()).toEqual('120,000원');
   });
 
   it('show review', async () => {
-    const wrapper = mount(ItemInfoPage);
-
     await wrapper.setData({
       review: [
         {
@@ -86,6 +81,25 @@ describe('ItemInfoPage', () => {
     expect(wrapper.find('[data-test="review-date"]').text()).toEqual('date');
     expect(wrapper.find('[data-test="review-title"]').text()).toEqual('title');
     expect(wrapper.find('[data-test="review-content"]').text()).toEqual('content');
+  });
+
+  it('show buy button', async () => {
+    await wrapper.setData({
+      product: {
+        sale: 34,
+        price: 120000
+      }
+    });
+    expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test="buy-btn"]').text()).toEqual('79,200원 구매');
+  });
+
+  it('show buy button', async () => {
+    await wrapper.setData({
+      select: false
+    });
+    expect(wrapper.find('[data-test="now-buy"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test="cart"]').exists()).toBe(true);
   });
 
   it('seleted color', async () => {
