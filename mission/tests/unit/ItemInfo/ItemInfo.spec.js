@@ -19,12 +19,8 @@ describe('ItemInfoPage', () => {
   it('show product image', () => {
     expect(wrapper.find('[data-test="main-Image"]').exists()).toBe(true);
   });
-});
 
-describe('Seller information', () => {
   it('show seller information', async () => {
-    const wrapper = mount(ItemInfoPage);
-
     await wrapper.setData({
       seller: {
         name: 'name',
@@ -35,18 +31,31 @@ describe('Seller information', () => {
     expect(wrapper.find('[data-test="seller-image"]').exists()).toBe(true);
     expect(wrapper.find('[data-test="seller-name"]').text()).toEqual('name');
     expect(wrapper.find('[data-test="seller-tag"]').text()).toEqual('#tag');
-  })
-});
+  });
 
-describe('Product information', () => {
+  it('click star', async () => {
+    await wrapper.setData({
+      star: true,
+    });
+  
+    expect(wrapper.get('[data-test="star"]').find('font-awesome-icon').isVisible()).toBe(true);
+  });
+
+  it('click nostar', async () => {
+    await wrapper.setData({
+      star: false,
+    });
+  
+    expect(wrapper.get('[data-test="nostar"]').find('font-awesome-icon').isVisible()).toBe(true);
+  });
+
   it('show product information', async () => {
-    const wrapper = mount(ItemInfoPage);
-
     await wrapper.setData({
       product: {
         title: 'title',
         sale: 34,
         price: 120000,
+        color: ['white', 'black']
       }
     });
 
@@ -57,10 +66,8 @@ describe('Product information', () => {
 
     expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);
     expect(wrapper.find('[data-test="buy-btn"]').text()).toEqual('79200원 구매');
-  })
-});
+  });
 
-describe('review', () => {
   it('show review', async () => {
     const wrapper = mount(ItemInfoPage);
 
@@ -75,9 +82,18 @@ describe('review', () => {
       ],
     });
 
-    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('review');
+    expect(wrapper.find('[data-test="review-id"]').text()).toEqual('re***');
     expect(wrapper.find('[data-test="review-date"]').text()).toEqual('date');
     expect(wrapper.find('[data-test="review-title"]').text()).toEqual('title');
     expect(wrapper.find('[data-test="review-content"]').text()).toEqual('content');
-  })
+  });
+
+  it('seleted color', async () => {
+    await wrapper.setData({
+      select: false
+    });
+
+    expect(wrapper.get('[data-test="select-color"]').find('select').isVisible()).toBe(true);
+  });
+
 });

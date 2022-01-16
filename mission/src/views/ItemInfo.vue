@@ -12,19 +12,23 @@
       <span id="seller-tag" data-test="seller-tag" v-for="i in this.seller.tag" :key="i">
         #{{ i }}
       </span>
-      <div id="content">
-        <fa data-test="seller-star" class="bi bi-star"/>
-      </div>
+    </div>
+    <div id="star-content">
+      <font-awesome-icon data-test="star" id="star" v-if="star" @click="starmark" icon="star" />
+      <font-awesome-icon data-test="nostar" id="nostar" v-else @click="starmark" icon="star" />
     </div>
   </div>
   <div class="product-Datail">
+    <hr>
     <div id="product-info">
       <h1 data-test="product-name">{{ product.title }}</h1>
-      <span data-test="product-sale" v-if="product.sale > 0">{{ product.sale }}% </span>
-      <span data-test="discount-price" v-if="product.sale > 0">
+      <span id="product-sale" data-test="product-sale" v-if="product.sale > 0">
+        {{ product.sale }}%
+      </span>
+      <span id="product-sale-price" data-test="discount-price" v-if="product.sale > 0">
         {{ calSale }}원
       </span>
-      <span data-test="product-price">{{ product.price }}원</span>
+      <span data-test="product-price" class="product-price" >{{ product.price }}원</span>
     </div>
     <div id="Detail">
       <h3>상품 정보</h3>
@@ -33,17 +37,27 @@
     </div>
   </div>
   <div class="review">
+    <hr color="#eee">
     <h2>리뷰</h2>
     <div id="review" v-for="(value, index) in review" :key="index">
-      <p data-test="review-id">{{ value.id }}</p>
-      <p data-test="review-date">{{ value.date }}</p>
+      <span id="review-id" data-test="review-id">{{ secretId(value.id) }}</span>
+      <span id="review-date" data-test="review-date">{{ value.date }}</span>
       <p data-test="review-title">{{ value.title }}</p>
       <p data-test="review-content">{{ value.content }}</p>
       <img id="review-img" v-if="this.review.img" :src="value.img">
+      <hr>
     </div>
   </div>
   <div class="buy">
-    <button id="buy-btn" data-test="buy-btn" >{{ calSale }}원 구매</button>
+    <button id="buy-btn" data-test="buy-btn" v-if="select" @click="buy">{{ calSale }}원 구매</button>
+    <div v-else class="selected">
+      <select data-test="select-color" v-model="select_model">
+        <option v-for="color in this.product.color" :key="color">{{ color }}</option>
+      </select>
+      <p>색상 : {{ select_model }}</p>
+      <button data-test="now-buy" >바로 구매</button>
+      <button data-test="cart">장바구니</button>
+    </div>
   </div>
 </div>
 </template>
@@ -53,6 +67,9 @@ export default {
   name: 'ItemInfoPage',
   data() {
     return {
+      star: true,
+      select: true,
+      select_model: '',
       seller: {
         name: '아디다스',
         tag: ['남성', '신발'],
@@ -61,6 +78,7 @@ export default {
       product: {
         id: 0,
         title: '슈퍼스타',
+        color: ['white', 'black'],
         content: 'Born in France',
         sale: 34,
         price: 120000,
@@ -87,6 +105,12 @@ export default {
     secretId(id) {
       return id.slice(0, 2) + '*'.repeat(id.length / 2);
     },
+    buy() {
+      this.select = !this.select;
+    },
+    starmark() {
+      this.star = !this.star;
+    },
   },
   computed: {
     calSale() {
@@ -107,19 +131,19 @@ export default {
 
 .main {
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 375px;
+  height: 375px;
   margin: 0px auto;
 }
 
 #main-Image {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
   transform: translate(50, 50);
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .seller {
@@ -138,10 +162,14 @@ export default {
   margin-left: 10px;
 }
 
+span {
+  padding-right: 10px;
+}
+
 #seller-image {
   float: left;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 70%;
   border: 1px solid gray;
   margin: 10px auto;
@@ -152,6 +180,22 @@ export default {
 }
 
 #seller-tag {
+  vertical-align: middle;
+}
+
+#star {
+  float: right;
+  color: #fdd835;
+  font-size: 40px;
+  padding: 20px;
+  vertical-align: middle;
+}
+
+#nostar {
+  float: right;
+  color: #eee;
+  font-size: 40px;
+  padding: 20px;
   vertical-align: middle;
 }
 
@@ -172,6 +216,19 @@ export default {
   vertical-align: middle;
 }
 
+#product-sale {
+  font-size: 25px;
+  color: red;
+}
+
+#product-sale-price {
+  font-size: 20px;
+}
+
+.product-price {
+  text-decoration : line-through;
+}
+
 #product-img {
   max-width: 100%;
   height: auto;
@@ -179,10 +236,9 @@ export default {
 }
 
 .review {
+  position: relative;
   width: 100%;
-  height: 2px;
   float: left;
-  background-color: #eee;
   margin: 20px auto;
   text-align: left;
 }
@@ -196,20 +252,29 @@ export default {
 }
 
 .buy {
+  overflow: hidden;
+  height: auto;
   position: fixed;
   bottom: 0;
   width: 100%;
   margin: 10px auto;
+  padding: 10px auto;
   vertical-align: middle;
+  background-color: white;
 }
 
 #buy-btn {
+  vertical-align: middle;
   background-color: black;
-  text-align: center;
   color: white;
   border-radius: 8px;
-  font-size: 30px;
-  padding: 20px auto;
+  font-size: 20px;
+}
+
+.selected {
+  vertical-align: middle;
+  text-align: center;
+  margin: 0px auto;
 }
 
 </style>
