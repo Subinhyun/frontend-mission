@@ -97,7 +97,7 @@ export default {
           img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
         },
         {
-          id: 'review',
+          id: 'reviewid',
           date: '2022-01-17',
           title: '별로네요',
           content: '실물과 달라요',
@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     secretId(id) {
-      return id.slice(0, 2) + '*'.repeat(id.length / 2);
+      return id.slice(0, 2) + '*'.repeat(id.length - 2);
     },
     buy() {
       this.select = !this.select;
