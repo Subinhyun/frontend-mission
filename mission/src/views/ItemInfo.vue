@@ -41,15 +41,19 @@
   <div class="review">
     <hr color="#eee">
     <h2>리뷰</h2>
-    <div id="review-content" v-for="(value, index) in review" :key="index">
-      <hr>
-      <span id="review-id" data-test="review-id">{{ secretId(value.id) }}</span>
-      <span id="review-date" data-test="review-date">{{ value.date }}</span><br>
-      <img v-if="review.img !== null" class="review-img" :src="value.img">
-      <span id="review-title" data-test="review-title">{{ value.title }}</span><br>
-      <span data-test="review-content">{{ value.content }}</span>
+    <div v-if="review != null">
+      <div id="review-content" v-for="(value, index) in review" :key="index">
+        <hr>
+        <span id="review-id" data-test="review-id">{{ secretId(value.id) }}</span>
+        <span id="review-date" data-test="review-date">{{ value.date }}</span><br>
+        <div v-if="ImgExists(value)">
+          <img class="review-img" :src="value.img">
+        </div>
+        <span id="review-title" data-test="review-title">{{ value.title }}</span><br>
+        <span data-test="review-content">{{ value.content }}</span>
+      </div>
     </div>
-    <p v-if="review == null">리뷰가 없습니다.</p>
+    <div v-else>리뷰가 없습니다.</div>
   </div>
   <div class="buy">
     <hr>
@@ -115,6 +119,9 @@ export default {
     },
     starmark() {
       this.star = !this.star;
+    },
+    ImgExists(review) {
+      return Object.prototype.hasOwnProperty.call(review, 'img');
     },
   },
   computed: {
