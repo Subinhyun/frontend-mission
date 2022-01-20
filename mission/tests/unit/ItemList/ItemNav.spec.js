@@ -16,10 +16,6 @@ describe('ItemListNav', () => {
     beforeEach(() => {
       wrapper = mount(ItemNav);
     });
-  
-    it('renders ItemInfoPage', () => {
-      expect(wrapper.find('#item-info-page').exists()).toBe(true);
-    });
 
     it('renders button', () => {
         expect(wrapper.find('[data-test="home"]').exists()).toBe(true);
