@@ -1,9 +1,9 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import ItemListNav from '@/components/ItemList/ItemListNav.vue';
+import ItemNav from '@/components/ItemList/ItemNav.vue';
 
 describe('ItemListNav', () => {
   it('redners ItemListNav', () => {
-    const wrapper = mount(ItemListNav);
+    const wrapper = mount(ItemNav);
 
     expect(wrapper.find('.item-list-nav').exists()).toBe(true);
   });
@@ -14,7 +14,7 @@ describe('ItemListNav', () => {
     let wrapper;
   
     beforeEach(() => {
-      wrapper = mount(ItemListNav);
+      wrapper = mount(ItemNav);
     });
   
     it('renders ItemInfoPage', () => {
@@ -32,7 +32,7 @@ describe('ItemListNav', () => {
 describe("Item List Nav Route", () => {
     it("renders a username from query string", () => {
         const username = "home";
-        const wrapper = shallowMount(ItemListNav, {
+        const wrapper = shallowMount(ItemNav, {
           mocks: {
             $route: {
               params: { username }

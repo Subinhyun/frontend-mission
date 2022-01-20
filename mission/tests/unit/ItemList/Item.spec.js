@@ -8,3 +8,19 @@ describe('ItemListItem', () => {
     expect(wrapper.find('.item-list-item').exists()).toBe(true);
   });
 });
+
+describe('ItemInfoPage', () => {
+
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(ItemInfoPage);
+  });
+
+  it('renders product information', () => {
+      expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test="product-name"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test="product-description"]').exists()).toBe(true);
+  });
+});

@@ -1,16 +1,19 @@
 <template>
   <div id="item-list-page">
-    <ItemListNav/>
+    <ItemHeader/>
+    <ItemNav/>
   </div>
 </template>
 
 <script>
-import ItemListNav from '@/components/ItemList/ItemListNav.vue';
+import ItemHeader from '@/components/ItemList/ItemHeader.vue';
+import ItemNav from '@/components/ItemList/ItemNav.vue';
 
 export default {
   name: 'ItemListPage',
   components: {
-    ItemListNav,
+    ItemNav,
+    ItemHeader,
   },
 };
 </script>
