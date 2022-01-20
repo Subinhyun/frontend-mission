@@ -1,4 +1,5 @@
 <template>
+<nav>
   <div class="item-list-nav">
     <ul>
       <li data-test="home" ><router-link class="link" :to="{ name: 'Home'}">
@@ -11,6 +12,7 @@
         <fa icon="user"></fa><br>마이페이지</router-link></li>
     </ul>
   </div>
+</nav>
 </template>
 
 <script>
