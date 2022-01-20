@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import { mount } from '@vue/test-utils';
-import ItemInfoPage from '@/views/ItemInfo.vue';
-
-describe('ItemInfoPage', () => {
-  it('redners ItemInfoPage', () => {
-    const wrapper = mount(ItemInfoPage);
-
-    expect(wrapper.find('#item-info-page').exists()).toBe(true);
-  });
-=======
 import { mount, shallowMount } from '@vue/test-utils';
 import ItemInfoPage from '@/views/ItemInfo.vue';
 
@@ -120,6 +109,4 @@ describe('ItemInfoPage', () => {
 
     expect(wrapper.get('[data-test="select-color"]').find('select').isVisible()).toBe(true);
   });
-
->>>>>>> 745fd8209772d0f512f3a543819d3db09a940e19
 });
