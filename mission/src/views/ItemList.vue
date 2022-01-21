@@ -1,7 +1,7 @@
 <template>
   <div id="item-list-page">
-    <ItemHeader />
     <Item v-for="product in products" :key="product" :product="product"/>
+    <ItemHeader :shop="shop"/>
     <ItemNav />
   </div>
 </template>
@@ -20,6 +20,9 @@ export default {
   },
   data() {
     return {
+      shop: {
+        title: 'My shopping mall',
+      },
       products: [
         {
           id: 0,
