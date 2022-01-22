@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
-import ItemInfoPage from '@/components/ItemList/Item.vue';
+import ItemInfoPage from '@/views/ItemList.vue';
+// import ItemListPage from '@/components/ItemList/Item.vue';
 
 describe('ItemListItem', () => {
   it('redners ItemListItem', () => {
@@ -23,4 +24,21 @@ describe('ItemInfoPage', () => {
       expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-description"]').exists()).toBe(true);
   });
+
+  it('render price', async () => {
+    // await wrapper.setData({
+    //   product: {
+    //     sale: 34,
+    //     price: 79200,
+    //     original_price: 289000,
+    //   }
+    // });
+
+    expect(wrapper.get('[data-test="product-sale"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="price"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="product-price"]').exists()).toBe(true);
+    expect(wrapper.get('[data-test="product-sale"]').text()).toBe('34%');
+    expect(wrapper.get('[data-test="price"]').text()).toBe('79,200원');
+    expect(wrapper.get('[data-test="product-price"]').text()).toBe('289,000원');
+});
 });

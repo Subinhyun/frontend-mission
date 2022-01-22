@@ -1,12 +1,17 @@
 <template>
   <div id="item-list-page">
-    <Item v-for="product in products" :key="product" :product="product"/>
     <ItemHeader :shop="shop"/>
+    <Item
+      v-for="product in products"
+      :key="product"
+      :product="product"
+    />
     <ItemNav />
   </div>
 </template>
 
 <script>
+import { reactive } from 'vue';
 import Item from '@/components/ItemList/Item.vue';
 import ItemHeader from '@/components/ItemList/ItemHeader.vue';
 import ItemNav from '@/components/ItemList/ItemNav.vue';
@@ -18,36 +23,39 @@ export default {
     ItemHeader,
     Item,
   },
-  data() {
-    return {
-      shop: {
-        title: 'My shopping mall',
+  setup() {
+    const shop = reactive({
+      title: 'My shopping mall',
+    });
+    const products = reactive([
+      {
+        id: 0,
+        title: '슈퍼스타',
+        color: ['white', 'black'],
+        content: 'Born in France',
+        sale: 34,
+        price: 79200,
+        original_price: 120000,
+        img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
       },
-      products: [
-        {
-          id: 0,
-          title: '슈퍼스타',
-          color: ['white', 'black'],
-          content: 'Born in France',
-          sale: 34,
-          price: 120000,
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
-        },
-        {
-          id: 1,
-          title: '이지 부스트 350 V2',
-          content: '인기',
-          price: 289000,
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/H02795-01-01.jpg',
-        },
-        {
-          id: 2,
-          title: '크리스티나이드',
-          content: 'Born in the States',
-          price: 130000,
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/FV6956-01-01.jpg',
-        },
-      ],
+      {
+        id: 1,
+        title: '이지 부스트 350 V2',
+        content: '인기',
+        original_price: 289000,
+        img: 'https://image.adidas.co.kr/upload/prod/basic/source/H02795-01-01.jpg',
+      },
+      {
+        id: 2,
+        title: '크리스티나이드',
+        content: 'Born in the States',
+        original_price: 130000,
+        img: 'https://image.adidas.co.kr/upload/prod/basic/source/FV6956-01-01.jpg',
+      },
+    ]);
+    return {
+      shop,
+      products,
     };
   },
 };

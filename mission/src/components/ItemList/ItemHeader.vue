@@ -1,7 +1,7 @@
 <template>
   <header v-show="!showHeader" :style="opacityStyle">
     <div class="item-list-header">
-      <h1>{{ shop.title }}</h1>
+      <h1 data-test="shop-title" >{{ shop.title }}</h1>
     </div>
   </header>
 </template>
@@ -50,12 +50,11 @@ header {
   right: 0;
   height: 10%;
   padding: 1rem;
-  color: black;
+  color: white;
+  text-shadow: -1px 0 #eee, 0 1px black, 1px 0 black, 0 -1px #eee;
   font-weight: bold;
-}
+  background: linear-gradient(to top, white,#C9D6FF);
 
-.header.is-hidden {
-  transform: translateY(-100%);
 }
 
 .item-list-header {
