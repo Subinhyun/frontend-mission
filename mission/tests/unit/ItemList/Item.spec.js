@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import ItemInfoPage from '@/views/ItemList.vue';
-// import ItemListPage from '@/components/ItemList/Item.vue';
+import ItemListPage from '@/components/ItemList/Item.vue';
 
 describe('ItemListItem', () => {
   it('redners ItemListItem', () => {
@@ -14,8 +14,25 @@ describe('ItemInfoPage', () => {
 
   let wrapper;
 
+  const imgUrl = 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg';
+
   beforeEach(() => {
-    wrapper = mount(ItemInfoPage);
+    wrapper = mount(ItemInfoPage, {
+      propsData: {
+        product: [
+          {
+            id: 0,
+            title: '슈퍼스타',
+            color: ['white', 'black'],
+            content: 'Born in France',
+            sale: 34,
+            price: 79200,
+            original_price: 120000,
+            img: imgUrl,
+          }
+        ],
+      }
+    });
   });
 
   it('renders product information', () => {
@@ -23,22 +40,15 @@ describe('ItemInfoPage', () => {
       expect(wrapper.find('[data-test="product-title"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-description"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test="product-img"]').find('img').attributes('src')).toBe(imgUrl);
   });
 
-  it('render price', async () => {
-    // await wrapper.setData({
-    //   product: {
-    //     sale: 34,
-    //     price: 79200,
-    //     original_price: 289000,
-    //   }
-    // });
-
-    expect(wrapper.get('[data-test="product-sale"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="price"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="product-price"]').exists()).toBe(true);
+  it('renders price', async () => {
+    expect(wrapper.find('[data-test="product-sale"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test="price"]').exists()).toBe(true);
+    expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
     expect(wrapper.get('[data-test="product-sale"]').text()).toBe('34%');
     expect(wrapper.get('[data-test="price"]').text()).toBe('79,200원');
     expect(wrapper.get('[data-test="product-price"]').text()).toBe('289,000원');
-});
+  });
 });

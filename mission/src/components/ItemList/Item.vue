@@ -2,7 +2,7 @@
 <main>
   <div class="item-list-item">
     <router-link class="link" :to="{ name: 'ItemInfoPage'}">
-      <img data-test="product-img" id="product-img" :src="product.img">
+      <img data-test="product-img" id="product-img" :src="product?.img">
     </router-link>
     <div v-if="product.price != null">
       <span data-test="product-sale" id="product-sale" >
