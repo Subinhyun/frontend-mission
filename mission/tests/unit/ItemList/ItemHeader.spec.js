@@ -1,4 +1,4 @@
-import { mount, render } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import ItemInfoPage from '@/views/ItemList.vue';
 // import ItemHeaderPage from '@/components/ItemList/ItemHeader.vue';
 
@@ -23,15 +23,15 @@ describe('lifecycle hook scroll event', () => {
       jest.restoreAllMocks();
     });
   
-    it('class component debounce', async () => {
-      const onScroll = jest.fn()
-      const { getByRole } = render(<ComponentClass onScroll={onScroll} />)
-      const one = getByRole('')
-    
-      fireEvent.scroll(one)
-    
-      wait(() => {
-        expect(onScroll).toHaveBeenCalled()
-      }, 0)
+    it('scroll', async () => {
+      await wrapper.setData({
+        showHeader: true,
+        opacityStyle: {
+          opacity: 0,
+        },
+      }); 
+      
+      // 
+
     })
 });

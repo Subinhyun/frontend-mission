@@ -5,21 +5,22 @@
       <img data-test="product-img" id="product-img" :src="product?.img">
     </router-link>
     <div v-if="product.price != null">
-      <span data-test="product-sale" id="product-sale" >
+      <span data-test="product-sale" id="product-sale">
         {{ product.sale }}%
       </span>
       <span data-test="price" id="price">
         {{ product.price.toLocaleString() }}원
-      </span>
+      </span><br>
     </div>
     <span v-else data-test="product-price" id="product-price">
       {{ product.original_price.toLocaleString() }}원
     </span>
-    <br>
-    <span data-test="product-title" id="product-title">{{ product.title }}</span><br>
-    <span data-test="product-description" id="product-description">
+    <p data-test="product-title" id="product-title">{{ product.title }}</p>
+    <fa v-if="heart" @click="heartMark" id="noHeart" icon="heart"></fa>
+    <fa v-else @click="heartMark" id="heart" icon="heart"></fa>
+    <p data-test="product-description" id="product-description">
       {{ product.content }}
-    </span>
+    </p>
   </div>
 </main>
 </template>
@@ -28,34 +29,39 @@
 export default {
   name: 'ItemListItem',
   props: ['product'],
+  data() {
+    return {
+      heart: true,
+    };
+  },
+  methods: {
+    heartMark() {
+      this.heart = !this.heart;
+    },
+  },
 };
 </script>
 
 <style>
 
 main {
-  display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 20%;
-  margin-top: 15%;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.item-list-item {
+  position: relative;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 body {
   padding-top: 75px;
-}
-
-.item-list-item {
-  max-width: 100%;
-  width: 50%;
-  position: relative;
-  float: left;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
-  flex: 3;
 }
 
 #product-img {
@@ -73,16 +79,35 @@ body {
 
 #product-price {
   float: left;
+  margin-left: 5px;
   margin-right: 5px;
+  padding: 0;
+  margin: 0;
 }
 
 #product-title {
   float: left;
   font-weight: bold;
+  margin-left: 5px;
+  margin: 0;
 }
 
 #product-description {
   float: left;
+  margin-left: 5px;
+  margin: 0;
+}
+
+#noHeart {
+  float: right;
+  margin-right: 5px;
+  color: #eee;
+}
+
+#heart {
+  float: right;
+  margin-right: 5px;
+  color: rgb(221, 80, 80);
 }
 
 </style>

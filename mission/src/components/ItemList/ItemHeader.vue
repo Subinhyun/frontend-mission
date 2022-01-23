@@ -50,11 +50,10 @@ header {
   right: 0;
   height: 10%;
   padding: 1rem;
-  color: white;
+  color: black;
   text-shadow: -1px 0 #eee, 0 1px black, 1px 0 black, 0 -1px #eee;
   font-weight: bold;
   background: linear-gradient(to top, white,#C9D6FF);
-
 }
 
 .item-list-header {

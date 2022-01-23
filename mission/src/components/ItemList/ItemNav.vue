@@ -26,23 +26,6 @@ export default {
       lastPosition: 0,
     };
   },
-  created() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      if (this.lastPosition < window.scrollY && this.limitPosition < window.scrollY) {
-        this.scrolled = true;
-      }
-      if (this.lastPosition > window.scrollY) {
-        this.scrolled = false;
-      }
-      this.lastPosition = window.scrollY;
-    },
-  },
 };
 </script>
 
@@ -51,11 +34,11 @@ export default {
 .item-list-nav {
   position : fixed;
   bottom : 0px;
-  margin: 0px auto;
   height: 10%;
   width: 100%;
   overflow: hidden;
   background-color: white;
+  margin-top: 10%;
 }
 
 hr {
