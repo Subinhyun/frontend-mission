@@ -1,5 +1,5 @@
 <template>
-<nav v-on="handleScroll">
+<nav>
   <div class="item-list-nav">
     <hr>
     <ul>
@@ -19,13 +19,6 @@
 <script>
 export default {
   name: 'ItemListNav',
-  data() {
-    return {
-      limitPosition: 500,
-      scrolled: false,
-      lastPosition: 0,
-    };
-  },
 };
 </script>
 
