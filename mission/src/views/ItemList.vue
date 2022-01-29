@@ -6,6 +6,7 @@
       v-for="product in products"
       :key="product"
       :product="product"
+      :rate="rate"
     />
     </div>
     <ItemNav />

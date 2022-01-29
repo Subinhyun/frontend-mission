@@ -11,27 +11,3 @@ describe('ItemHeaderPage', () => {
     expect(wrapper.find('[data-test="shop-title"]').text()).toEqual('My shopping mall');
   });
 });
-
-describe('lifecycle hook scroll event', () => {
-  
-  let wrapper;
-  
-    beforeEach(() => {
-      wrapper = mount(ItemInfoPage);
-    });
-    afterEach(() => {
-      jest.restoreAllMocks();
-    });
-  
-    it('scroll', async () => {
-      await wrapper.setData({
-        showHeader: true,
-        opacityStyle: {
-          opacity: 0,
-        },
-      }); 
-      
-      // 
-
-    })
-});

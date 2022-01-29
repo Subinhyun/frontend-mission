@@ -6,7 +6,7 @@
     </router-link>
     <div v-if="product.price != null">
       <span data-test="product-sale" id="product-sale">
-        {{ product.sale }}%
+        {{ displayDiscountRate }}
       </span>
       <span data-test="price" id="price">
         {{ product.price.toLocaleString() }}원
@@ -37,6 +37,13 @@ export default {
   methods: {
     heartMark() {
       this.heart = !this.heart;
+    },
+  },
+  computed: {
+    displayDiscountRate() {
+      const rate = ((this.product.original_price - this.product.price)
+      / this.product.original_price) * 100;
+      return `${rate.toFixed(0)}%`;
     },
   },
 };
