@@ -1,7 +1,4 @@
 <template>
-<<<<<<< HEAD
-<div id='item-info-page'></div>
-=======
 <div id='item-info-page'>
   <div class="main">
     <img id="main-Image" data-test="main-Image" :src="product.img">
@@ -71,7 +68,6 @@
     </div>
   </div>
 </div>
->>>>>>> 745fd8209772d0f512f3a543819d3db09a940e19
 </template>
 
 <script>
@@ -79,16 +75,6 @@ export default {
   name: 'ItemInfoPage',
   data() {
     return {
-<<<<<<< HEAD
-
-    };
-  },
-  methods: {
-
-  },
-  computed: {
-
-=======
       star: true,
       select: true,
       select_model: '',
@@ -144,15 +130,12 @@ export default {
       const totalPrice = this.product.price - discount;
       return totalPrice.toLocaleString();
     },
->>>>>>> 745fd8209772d0f512f3a543819d3db09a940e19
   },
 };
 </script>
 
 <style scoped>
 
-<<<<<<< HEAD
-=======
 html, body {
   margin: 0;
   padding: 0;
@@ -352,5 +335,4 @@ span {
   font-size: 15px;
 }
 
->>>>>>> 745fd8209772d0f512f3a543819d3db09a940e19
 </style>
