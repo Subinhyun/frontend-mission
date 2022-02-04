@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ItemInfoPage',
   data() {
@@ -83,31 +85,6 @@ export default {
         tag: ['남성', '신발'],
         img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
       },
-      product: {
-        id: 0,
-        title: '슈퍼스타',
-        color: ['white', 'black'],
-        content: 'Born in France',
-        sale: 34,
-        price: 120000,
-        img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
-      },
-      review: [
-        {
-          id: 'review',
-          date: '2022-01-15',
-          title: '너무 좋아요',
-          content: '최고입니다 !! 사이즈도 너무 잘 맞아요. 제 인생 신발입니다 !!',
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
-        },
-        {
-          id: 'reviewid',
-          date: '2022-01-17',
-          title: '별로네요',
-          content: '실물과 달라요',
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/H02795-01-01.jpg',
-        },
-      ],
     };
   },
   methods: {
@@ -123,6 +100,16 @@ export default {
     ImgExists(review) {
       return Object.prototype.hasOwnProperty.call(review, 'img');
     },
+    getItemInfo() {
+      const url = 'https://virtserver.swaggerhub.com/lkaybob/projectlion-vue/1.0.0/item/1';
+      axios.get(url)
+        .then((response) => {
+          console.log(response.data);
+          this.products = response.data;
+        }).catch((error) => {
+          console.log(error);
+        });
+    },
   },
   computed: {
     calSale() {
@@ -131,6 +118,7 @@ export default {
       return totalPrice.toLocaleString();
     },
   },
+
 };
 </script>
 

@@ -1,25 +1,25 @@
 <template>
 <main>
   <div class="item-list-item">
-    <router-link class="link" :to="{ name: 'ItemInfoPage'}">
-      <img data-test="product-img" id="product-img" :src="product?.img">
+    <router-link class="link"
+    :to="{
+      name: 'ItemInfoPage',
+    }">
+      <img data-test="product-img" id="product-img" :src="img">
     </router-link>
-    <div v-if="product.price != null">
+    <div v-if="isDiscounted">
       <span data-test="product-sale" id="product-sale">
         {{ displayDiscountRate }}
       </span>
       <span data-test="price" id="price">
-        {{ product.price.toLocaleString() }}원
+        {{ priceWithComma }}
       </span><br>
     </div>
-    <span v-else data-test="product-price" id="product-price">
-      {{ product.original_price.toLocaleString() }}원
-    </span>
-    <p data-test="product-title" id="product-title">{{ product.title }}</p>
+    <p data-test="product-title" id="product-title">{{ name }}</p>
     <fa v-if="heart" @click="heartMark" id="noHeart" icon="heart"></fa>
     <fa v-else @click="heartMark" id="heart" icon="heart"></fa>
     <p data-test="product-description" id="product-description">
-      {{ product.content }}
+      {{ description }}
     </p>
   </div>
 </main>
@@ -28,7 +28,14 @@
 <script>
 export default {
   name: 'ItemListItem',
-  props: ['product'],
+  props: {
+    product_no: { type: String, default: '' },
+    name: { type: String, default: '' },
+    price: { type: Number, default: 0 },
+    img: { type: String, default: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/suit-1.png' },
+    original_price: { type: Number, default: -1 },
+    description: { type: String, default: '' },
+  },
   data() {
     return {
       heart: true,
@@ -40,9 +47,14 @@ export default {
     },
   },
   computed: {
+    priceWithComma() {
+      return `${this.price.toLocaleString()}원`;
+    },
+    isDiscounted() {
+      return this.original_price !== -1;
+    },
     displayDiscountRate() {
-      const rate = ((this.product.original_price - this.product.price)
-      / this.product.original_price) * 100;
+      const rate = ((this.original_price - this.price) / this.original_price) * 100;
       return `${rate.toFixed(0)}%`;
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <header v-show="!showHeader" :style="opacityStyle">
+  <header>
     <div class="item-list-header">
       <h1 data-test="shop-title" >{{ shop.title }}</h1>
     </div>
@@ -12,30 +12,24 @@ export default {
   props: ['shop'],
   data() {
     return {
-      showHeader: true,
-      opacityStyle: {
-        opacity: 0,
-      },
+      isScrolled: false,
     };
   },
-  mounted() {
-    window.addEventListener('scroll', this.OnScroll);
+  methods: {
+    handleScroll() {
+      this.isScrolled = window.scrollY !== 0;
+    },
+  },
+  computed: {
+    isVisible() {
+      return this.isScrolled ? '-50px' : '0px';
+    },
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
   },
   beforeUnmount() {
-    window.removeEventListener('scroll', this.OnScroll);
-  },
-  methods: {
-    OnScroll() {
-      const top = document.documentElement.scrollTop;
-      if (top > 60) {
-        let opacity = top / 140;
-        opacity = opacity > 1 ? 1 : opacity;
-        this.opacityStyle = { opacity };
-        this.showHeader = true;
-      } else {
-        this.showHeader = false;
-      }
-    },
+    window.removeEventListener('scroll', this.handleScroll);
   },
 };
 </script>
@@ -51,9 +45,7 @@ header {
   height: 10%;
   padding: 1rem;
   color: black;
-  text-shadow: -1px 0 #eee, 0 1px black, 1px 0 black, 0 -1px #eee;
   font-weight: bold;
-  background: linear-gradient(to top, white,#C9D6FF);
 }
 
 .item-list-header {
