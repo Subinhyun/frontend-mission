@@ -1,12 +1,9 @@
 <template>
 <main>
+  <router-link class="link"
+    :to="`/item/${ id }`">
   <div class="item-list-item">
-    <router-link class="link"
-    :to="{
-      name: 'ItemInfoPage',
-    }">
       <img data-test="product-img" id="product-img" :src="img">
-    </router-link>
     <div v-if="isDiscounted">
       <span data-test="product-sale" id="product-sale">
         {{ displayDiscountRate }}
@@ -22,6 +19,7 @@
       {{ description }}
     </p>
   </div>
+  </router-link>
 </main>
 </template>
 
@@ -29,6 +27,7 @@
 export default {
   name: 'ItemListItem',
   props: {
+    id: { type: Number, default: 1 },
     product_no: { type: String, default: '' },
     name: { type: String, default: '' },
     price: { type: Number, default: 0 },

@@ -16,7 +16,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
-    path: '/item',
+    path: '/item/:id',
     name: 'ItemInfoPage',
     component: () => import('../views/ItemInfo.vue'),
   },

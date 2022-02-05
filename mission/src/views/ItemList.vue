@@ -1,6 +1,7 @@
 <template>
   <div id="item-list-page">
     <ItemHeader :shop="shop"/>
+    <p id="for-sale">판매 중인 상품</p>
     <div id="item-list">
     <Item
       v-for="product in products"
@@ -55,8 +56,15 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   grid-gap: 15px;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-bottom: 20%;
+}
+
+#for-sale {
+  text-align: left;
+  margin-bottom: 0;
+  margin-left: 20px;
+  color: #808080;
 }
 
 </style>
