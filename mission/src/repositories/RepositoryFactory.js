@@ -1,9 +1,9 @@
 import ItemRepository from '@/repositories/ItemRepository';
-import HeartRepository from '@/repositories/HeartRepository';
+import WishRepository from '@/repositories/WishRepository';
 
 const repositories = {
   items: ItemRepository,
-  wishs: HeartRepository,
+  wishs: WishRepository,
 };
 
 export default {

@@ -19,8 +19,8 @@ const routes = [
   },
   {
     path: '/wish',
-    name: 'HeartListPage',
-    component: () => import('../views/HeartList.vue'),
+    name: 'WishListPage',
+    component: () => import('../views/WishList.vue'),
   },
 ];
 

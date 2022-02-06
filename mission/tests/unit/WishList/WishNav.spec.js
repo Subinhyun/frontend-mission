@@ -1,23 +1,23 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
-import ItemNav from '@/components/ItemList/ItemNav.vue';
 import ItemListPage from '@/views/ItemList.vue';
+import WishNav from '@/components/WishList/WishNav.vue';
 import WishList from '@/views/WishList.vue';
 
-describe('ItemListNav', () => {
+describe('WishListNav', () => {
   it('redners ItemListNav', () => {
-    const wrapper = mount(ItemNav);
+    const wrapper = mount(WishNav);
 
-    expect(wrapper.find('.item-list-nav').exists()).toBe(true);
+    expect(wrapper.find('.wish-list-nav').exists()).toBe(true);
   });
 });
 
-describe('ItemListNav', () => {
+describe('WishListNav', () => {
 
     let wrapper;
   
     beforeEach(() => {
-      wrapper = mount(ItemNav);
+      wrapper = mount(WishNav);
     });
 
     it('renders button', () => {
@@ -28,10 +28,10 @@ describe('ItemListNav', () => {
     });
 });
 
-describe("Item List Nav Route", () => {
+describe("Wish List Nav Route", () => {
     it("renders a username from query string", () => {
         const username = "home";
-        const wrapper = shallowMount(ItemNav);
+        const wrapper = shallowMount(WishNav);
       
         expect(wrapper.find('[data-test="home"]').text()).toBe('홈');
         expect(wrapper.find('[data-test="heart"]').text()).toBe('찜');
@@ -60,7 +60,7 @@ test('routing', async () => {
   router.push('/')
   await router.isReady()
 
-  const wrapper = mount(ItemNav, {
+  const wrapper = mount(WishNav, {
     global: {
       plugins: [router]
     }

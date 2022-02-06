@@ -1,9 +1,9 @@
 <template>
   <div id="wish-list-page">
-    <HeartHeader :shop="shop"/>
+    <WishHeader :shop="shop"/>
     <p id="for-sale">찜한 상품</p>
     <div id="wish-list">
-    <Heart
+    <Wish
       v-for="product in products"
       :key="product.product_no"
       :name="product.name"
@@ -12,24 +12,24 @@
       :original_price="product.original_price"
     />
     </div>
-    <HeartNav />
+    <WishNav />
   </div>
 </template>
 
 <script>
-import Heart from '@/components/HeartList/Heart.vue';
-import HeartHeader from '@/components/HeartList/HeartHeader.vue';
-import HeartNav from '@/components/HeartList/HeartNav.vue';
+import Wish from '@/components/WishList/Wish.vue';
+import WishHeader from '@/components/WishList/WishHeader.vue';
+import WishNav from '@/components/WishList/WishNav.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
-const HeartRepository = Repository.get('wishs');
+const WishRepository = Repository.get('wishs');
 
 export default {
-  name: 'HeartListPage',
+  name: 'WishListPage',
   components: {
-    HeartNav,
-    HeartHeader,
-    Heart,
+    WishNav,
+    WishHeader,
+    Wish,
   },
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     async getWish() {
-      const { data } = await HeartRepository.get();
+      const { data } = await WishRepository.get();
       this.products = data;
     },
   },
