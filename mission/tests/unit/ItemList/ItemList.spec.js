@@ -1,11 +1,9 @@
-import { mount, flushPromises } from '@vue/test-utils';
-import { createRouter, createWebHistory } from 'vue-router';
-import ItemInfoPage from '@/views/ItemList.vue';
-import axios from 'axios';
+import { mount } from '@vue/test-utils';
+import ItemListPage from '@/views/ItemList.vue';
 
 describe('ItemListPage', () => {
   it('redners ItemListPage', () => {
-    const wrapper = mount(ItemInfoPage);
+    const wrapper = mount(ItemListPage);
 
     expect(wrapper.find('#item-list-page').exists()).toBe(true);
   });

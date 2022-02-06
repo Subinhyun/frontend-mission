@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import ItemInfoPage from '@/views/ItemList.vue';
-// import ItemHeaderPage from '@/components/ItemList/ItemHeader.vue';
 
 describe('ItemHeaderPage', () => {
   it('redners ItemHeaderPage', () => {

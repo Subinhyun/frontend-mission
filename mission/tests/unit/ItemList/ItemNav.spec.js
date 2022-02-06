@@ -1,7 +1,9 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
 import ItemNav from '@/components/ItemList/ItemNav.vue';
-import axios from 'axios';
+import ItemListPage from '@/views/ItemList.vue';
+import HeartList from '@/views/HeartList.vue';
+
 describe('ItemListNav', () => {
   it('redners ItemListNav', () => {
     const wrapper = mount(ItemNav);
@@ -44,12 +46,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: ItemNav
+      component: ItemListPage
     },
     {
-      path: '/About',
-      name: 'About',
-      component: ''
+      path: '/wish',
+      name: 'HeartListPage',
+      component: HeartList
     }
   ]
 });
@@ -63,9 +65,7 @@ test('routing', async () => {
       plugins: [router]
     }
   })
-  // expect(wrapper.html()).toContain('Welcome to the blogging app')
-
+  
   await wrapper.find('a').trigger('click');
-  // await flushPromises();
-  expect(wrapper.html()).toContain('Testing Vue Router');
+  expect(wrapper.html()).toContain('');
 });

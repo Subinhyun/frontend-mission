@@ -1,8 +1,8 @@
 <template>
-  <div id="item-list-page">
+  <div id="wish-list-page">
     <HeartHeader :shop="shop"/>
     <p id="for-sale">찜한 상품</p>
-    <div id="item-list">
+    <div id="wish-list">
     <Heart
       v-for="product in products"
       :key="product.product_no"
@@ -44,7 +44,7 @@ export default {
   methods: {
     async getWish() {
       const { data } = await HeartRepository.get();
-      this.products = data.wishs;
+      this.products = data;
     },
   },
 };
@@ -52,7 +52,7 @@ export default {
 
 <style>
 
-#item-list {
+#wish-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   grid-gap: 15px;
