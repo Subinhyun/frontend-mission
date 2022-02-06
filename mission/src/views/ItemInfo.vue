@@ -23,14 +23,14 @@
     <hr>
     <div id="product-info">
       <h1 data-test="product-name">{{ product.name }}</h1>
-      <span v-if="isDiscounted()" id="product-sale" data-test="product-sale">
+      <span id="product-sale" data-test="product-sale">
         {{ display_discount_rate }}
       </span>
       <span id="product-sale-price" data-test="product-price">
-        {{ priceStringWithComma(isDiscounted() ? product.price : product.original_price) }}
+        {{ product.price }}원
       </span>
-      <span v-if="isDiscounted()" data-test="product-price">
-        {{ priceStringWithComma(product.original_price) }}
+      <span data-test="product-price" class="productPrice">
+        {{ product.original_price }}원
       </span>
     </div>
     <div id="Detail">
@@ -55,7 +55,7 @@
   <div class="buy">
     <hr>
     <button id="buy-btn" data-test="buy-btn" @click="buy">
-      {{ `${priceStringWithComma(product.price)} 구매` }}
+      {{ `${product.price}원 구매` }}
     </button>
   </div>
 </div>
@@ -96,12 +96,6 @@ export default {
     },
     ImgExists(review) {
       return Object.prototype.hasOwnProperty.call(review, 'img');
-    },
-    isDiscounted() {
-      return Object.prototype.hasOwnProperty.call(this.$data, 'original_price');
-    },
-    priceStringWithComma(value) {
-      return `${value.toLocaleString()}원`;
     },
     doesReviewImgExists(review) {
       return Object.prototype.hasOwnProperty.call(review, 'img');
