@@ -67,5 +67,5 @@ test('routing', async () => {
   })
   
   await wrapper.find('a').trigger('click');
-  expect(wrapper.html()).toContain('');
+  expect(wrapper.html()).toContain('찜');
 });

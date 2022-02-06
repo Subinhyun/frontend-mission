@@ -15,11 +15,10 @@ describe('ItemListPage', () => {
 
   it('renders product information', () => {
     const wrapper = mount(ItemListPage);
+    
       expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-name"]').exists()).toBe(true);
-      // expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-description"]').exists()).toBe(true);
-      expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
   });
 
   it('renders discount rate when current price is lower than original price', () => {
