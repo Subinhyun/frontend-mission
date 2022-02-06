@@ -9,7 +9,6 @@
       :name="product.name"
       :description="product.description"
       :price="product.price"
-      :original_price="product.original_price"
     />
     </div>
     <WishNav />
@@ -44,7 +43,7 @@ export default {
   methods: {
     async getWish() {
       const { data } = await WishRepository.get();
-      this.products = data;
+      this.products = data.items;
     },
   },
 };

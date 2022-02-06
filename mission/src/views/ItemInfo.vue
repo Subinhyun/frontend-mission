@@ -70,8 +70,6 @@ export default {
   name: 'ItemInfoPage',
   props: {
     id: { type: Number, default: 1 },
-    price: { type: Number, default: 0 },
-    original_price: { type: Number, default: -1 },
   },
   data() {
     return {
@@ -111,7 +109,8 @@ export default {
   },
   computed: {
     display_discount_rate() {
-      const rate = ((this.original_price - this.price) / this.original_price) * 100;
+      const rate = ((this.product.original_price - this.product.price)
+      / this.product.original_price) * 100;
       return `${Number.prototype.toFixed.call(rate, 0)}%`;
     },
   },
