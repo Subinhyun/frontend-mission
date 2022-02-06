@@ -1,54 +1,88 @@
-import { mount, shallowMount } from '@vue/test-utils';
-import ItemInfoPage from '@/views/ItemList.vue';
+// import { mount, shallowMount } from '@vue/test-utils';
+// import ItemInfoPage from '@/views/ItemList.vue';
+// import ItemListPage from '@/components/ItemList/Item.vue';
+
+// const props = {
+//   name: 'product 1', price: 13400, description: 'description 1',
+// };
+// const testDisplayPrice = '13,400원';
+
+// describe('ItemListItem', () => {
+//   it('redners ItemListItem', () => {
+//     const wrapper = mount(ItemListPage);
+
+//     expect(wrapper.find('.item-list-item').exists()).toBe(true);
+//   });
+// });
+
+// describe('ItemInfoPage', () => {
+//   const wrapper = mount(ItemListPage);
+//   it('renders product information', () => {
+//       expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
+//       expect(wrapper.find('[data-test="product-title"]').exists()).toBe(true);
+//       expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
+//       expect(wrapper.find('[data-test="product-description"]').exists()).toBe(true);
+//       expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
+//   });
+
+//   it('renders item information', () => {
+//     const wrapper = mount(ItemListPage, {
+//       props,
+//     });
+
+//     expect(wrapper.find('[data-test="price"]').text()).toBe(testDisplayPrice);
+//     expect(wrapper.find('[data-test="name"]').text()).toBe(props.name);
+//     expect(wrapper.find('[data-test="description"]').text()).toBe(props.description);
+//   });
+
+//   it('renders discount rate when current price is lower than original price', () => {
+//     const originalPrice = 120000;
+//     const testDiscountRate = '11%';
+//     const mergedProps = { original_price: originalPrice, ...props };
+//     const wrapper = mount(ItemListPage, {
+//       props: {
+//         ...mergedProps,
+//       },
+//     });
+
+//     expect(wrapper.find('[data-test="discount-rate"]').text()).toBe(testDiscountRate);
+//   });
+// });
+
+import { mount } from '@vue/test-utils';
 import ItemListPage from '@/components/ItemList/Item.vue';
 
-describe('ItemListItem', () => {
+const props = {
+  name: 'product 1', price: 13400, description: 'description 1',
+};
+const testDisplayPrice = '13,400원';
+
+describe('ItemListPage', () => {
   it('redners ItemListItem', () => {
-    const wrapper = mount(ItemInfoPage);
+    const wrapper = mount(ItemListPage);
 
     expect(wrapper.find('.item-list-item').exists()).toBe(true);
   });
-});
-
-describe('ItemInfoPage', () => {
-
-  let wrapper;
-
-  const imgUrl = 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg';
-
-  beforeEach(() => {
-    wrapper = mount(ItemInfoPage, {
-      propsData: {
-        product: [
-          {
-            id: 0,
-            title: '슈퍼스타',
-            color: ['white', 'black'],
-            content: 'Born in France',
-            sale: 34,
-            price: 79200,
-            original_price: 120000,
-            img: imgUrl,
-          }
-        ],
-      }
-    });
-  });
 
   it('renders product information', () => {
+    const wrapper = mount(ItemListPage);
       expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
-      expect(wrapper.find('[data-test="product-title"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test="product-name"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
       expect(wrapper.find('[data-test="product-description"]').exists()).toBe(true);
-      expect(wrapper.find('[data-test="product-img"]').find('img').attributes('src')).toBe(imgUrl);
+      expect(wrapper.find('[data-test="product-img"]').exists()).toBe(true);
   });
 
-  it('renders price', async () => {
-    expect(wrapper.find('[data-test="product-sale"]').exists()).toBe(true);
-    expect(wrapper.find('[data-test="price"]').exists()).toBe(true);
-    expect(wrapper.find('[data-test="product-price"]').exists()).toBe(true);
-    expect(wrapper.get('[data-test="product-sale"]').text()).toBe('34%');
-    expect(wrapper.get('[data-test="price"]').text()).toBe('79,200원');
-    expect(wrapper.get('[data-test="product-price"]').text()).toBe('289,000원');
+  it('renders discount rate when current price is lower than original price', () => {
+    const originalPrice = 15000;
+    const testDiscountRate = '11%';
+    const mergedProps = { original_price: originalPrice, ...props };
+    const wrapper = mount(ItemListPage, {
+      props: {
+        ...mergedProps,
+      },
+    });
+
+    expect(wrapper.find('[data-test="product-sale"]').text()).toBe(testDiscountRate);
   });
 });

@@ -8,11 +8,11 @@
       <span data-test="product-sale" id="product-sale">
         {{ displayDiscountRate }}
       </span>
-      <span data-test="price" id="price">
+      <span data-test="product-price" id="price">
         {{ priceWithComma }}
       </span><br>
     </div>
-    <p data-test="product-title" id="product-title">{{ name }}</p>
+    <p data-test="product-name" id="product-name">{{ name }}</p>
     <fa v-if="heart" @click="heartMark" id="noHeart" icon="heart"></fa>
     <fa v-else @click="heartMark" id="heart" icon="heart"></fa>
     <p data-test="product-description" id="product-description">
@@ -103,7 +103,7 @@ body {
   margin: 0;
 }
 
-#product-title {
+#product-name {
   float: left;
   font-weight: bold;
   margin-left: 5px;

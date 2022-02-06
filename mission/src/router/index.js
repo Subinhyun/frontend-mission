@@ -20,6 +20,11 @@ const routes = [
     name: 'ItemInfoPage',
     component: () => import('../views/ItemInfo.vue'),
   },
+  {
+    path: '/wish',
+    name: 'HeartListPage',
+    component: () => import('../views/HeartList.vue'),
+  },
 ];
 
 export default createRouter({

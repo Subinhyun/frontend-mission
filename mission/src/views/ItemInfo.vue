@@ -15,18 +15,18 @@
       </span>
     </div>
     <div id="star-content">
-      <font-awesome-icon data-test="star" id="star" v-if="star" @click="starmark" icon="star" />
-      <font-awesome-icon data-test="nostar" id="nostar" v-else @click="starmark" icon="star" />
+      <fa data-test="star" id="star" v-if="star" @click="starmark" icon="star" />
+      <fa data-test="nostar" id="nostar" v-else @click="starmark" icon="star" />
     </div>
   </div>
   <div class="product-Datail">
     <hr>
     <div id="product-info">
       <h1 data-test="product-name">{{ product.name }}</h1>
-      <span id="product-sale" data-test="product-sale" v-if="isDiscounted()">
+      <span v-if="isDiscounted()" id="product-sale" data-test="product-sale">
         {{ display_discount_rate }}
       </span>
-      <span id="product-sale-price" data-test="discount-price">
+      <span id="product-sale-price" data-test="product-price">
         {{ priceStringWithComma(isDiscounted() ? product.price : product.original_price) }}
       </span>
       <span v-if="isDiscounted()" data-test="product-price">
