@@ -1,35 +1,34 @@
 <template>
-  <div id="item-list-page">
-    <ItemHeader :shop="shop"/>
-    <p id="for-sale">판매 중인 상품</p>
-    <div id="item-list">
-    <Item
+  <div id="wish-list-page">
+    <WishHeader :shop="shop"/>
+    <p id="for-sale">찜한 상품</p>
+    <div id="wish-list">
+    <Wish
       v-for="product in products"
       :key="product.product_no"
       :name="product.name"
       :description="product.description"
       :price="product.price"
-      :original_price="product.original_price"
     />
     </div>
-    <ItemNav />
+    <WishNav />
   </div>
 </template>
 
 <script>
-import Item from '@/components/ItemList/Item.vue';
-import ItemHeader from '@/components/ItemList/ItemHeader.vue';
-import ItemNav from '@/components/ItemList/ItemNav.vue';
+import Wish from '@/components/WishList/Wish.vue';
+import WishHeader from '@/components/WishList/WishHeader.vue';
+import WishNav from '@/components/WishList/WishNav.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
-const ItemRepository = Repository.get('items');
+const WishRepository = Repository.get('wishs');
 
 export default {
-  name: 'ItemListPage',
+  name: 'WishListPage',
   components: {
-    ItemNav,
-    ItemHeader,
-    Item,
+    WishNav,
+    WishHeader,
+    Wish,
   },
   data() {
     return {
@@ -39,11 +38,11 @@ export default {
     };
   },
   created() {
-    this.getItem();
+    this.getWish();
   },
   methods: {
-    async getItem() {
-      const { data } = await ItemRepository.get();
+    async getWish() {
+      const { data } = await WishRepository.get();
       this.products = data.items;
     },
   },
@@ -52,7 +51,7 @@ export default {
 
 <style>
 
-#item-list {
+#wish-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   grid-gap: 15px;

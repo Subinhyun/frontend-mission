@@ -1,118 +1,92 @@
 <template>
 <div id='item-info-page'>
   <div class="main">
-    <img id="main-Image" data-test="main-Image" :src="product.img">
+    <img id="main-Image" data-test="main-Image" :src="product.image">
   </div>
   <div class='seller'>
     <div id="content">
-      <img id="seller-image" data-test="seller-image" :src="seller.img">
+      <img id="seller-image" data-test="seller-image" :src="product.seller.profile_image">
     </div>
     <div id="content">
-      <h3 id="seller-name" data-test="seller-name">{{ seller.name }}</h3>
-      <span id="seller-tag" data-test="seller-tag" v-for="i in this.seller.tag" :key="i">
-        #{{ i }}
+      <h3 id="seller-name" data-test="seller-name">{{ product.seller.name }}</h3>
+      <span id="seller-tag" data-test="seller-tag"
+      v-for="tag in product.seller.hash_tags" :key="tag">
+        #{{ tag }}
       </span>
     </div>
     <div id="star-content">
-      <font-awesome-icon data-test="star" id="star" v-if="star" @click="starmark" icon="star" />
-      <font-awesome-icon data-test="nostar" id="nostar" v-else @click="starmark" icon="star" />
+      <fa data-test="star" id="star" v-if="star" @click="starmark" icon="star" />
+      <fa data-test="nostar" id="nostar" v-else @click="starmark" icon="star" />
     </div>
   </div>
   <div class="product-Datail">
     <hr>
     <div id="product-info">
-      <h1 data-test="product-name">{{ product.title }}</h1>
-      <span id="product-sale" data-test="product-sale" v-if="product.sale > 0">
-        {{ product.sale }}%
+      <h1 data-test="product-name">{{ product.name }}</h1>
+      <span id="product-sale" data-test="product-sale">
+        {{ display_discount_rate }}
       </span>
-      <span id="product-sale-price" data-test="discount-price" v-if="product.sale > 0">
-        {{ calSale }}원
+      <span id="product-sale-price" data-test="product-price">
+        {{ product.price }}원
       </span>
-      <span data-test="product-price" :class="{productPrice: product.sale > 0}">
-        {{ product.price.toLocaleString() }}원
+      <span data-test="product-price" class="productPrice">
+        {{ product.original_price }}원
       </span>
     </div>
     <div id="Detail">
       <h3>상품 정보</h3>
-      <img id="product-img" :src="product.img">
-      <p>{{ product.content }}</p>
+      <html v-html="product.description"></html>
     </div>
   </div>
   <div class="review">
     <hr color="#eee">
     <h2>리뷰</h2>
-    <div v-if="review != null">
-      <div id="review-content" v-for="(value, index) in review" :key="index">
+      <div id="review-content" v-for="value in product.reviews" :key="value">
         <hr>
-        <span id="review-id" data-test="review-id">{{ secretId(value.id) }}</span>
-        <span id="review-date" data-test="review-date">{{ value.date }}</span><br>
+        <span id="review-id" data-test="review-id">{{ value.writer }}</span>
+        <span id="review-date" data-test="review-date">{{ value.created }}</span><br>
         <div v-if="ImgExists(value)">
           <img class="review-img" :src="value.img">
         </div>
         <span id="review-title" data-test="review-title">{{ value.title }}</span><br>
         <span data-test="review-content">{{ value.content }}</span>
       </div>
-    </div>
-    <div v-else>리뷰가 없습니다.</div>
   </div>
   <div class="buy">
     <hr>
-    <button id="buy-btn" data-test="buy-btn" v-if="select" @click="buy">{{ calSale }}원 구매</button>
-    <div v-else class="selected">
-      <select id="color-select" data-test="select-color" v-model="select_model">
-        <option v-for="color in this.product.color" :key="color">{{ color }}</option>
-      </select>
-      <p id="selected-color" >색상 : {{ select_model }}</p>
-      <button id="now-btn" data-test="now-buy" >바로 구매</button>
-      <button id="cart-btn" data-test="cart">장바구니</button>
-    </div>
+    <button id="buy-btn" data-test="buy-btn" @click="buy">
+      {{ `${product.price}원 구매` }}
+    </button>
   </div>
 </div>
 </template>
 
 <script>
+import Repository from '@/repositories/RepositoryFactory';
+
+const ItemRepository = Repository.get('items');
+
 export default {
   name: 'ItemInfoPage',
+  props: {
+    id: { type: Number, default: 1 },
+  },
   data() {
     return {
       star: true,
-      select: true,
-      select_model: '',
-      seller: {
-        name: '아디다스',
-        tag: ['남성', '신발'],
-        img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
-      },
       product: {
-        id: 0,
-        title: '슈퍼스타',
-        color: ['white', 'black'],
-        content: 'Born in France',
-        sale: 34,
-        price: 120000,
-        img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
+        seller: {},
+        reviews: [{}],
       },
-      review: [
-        {
-          id: 'review',
-          date: '2022-01-15',
-          title: '너무 좋아요',
-          content: '최고입니다 !! 사이즈도 너무 잘 맞아요. 제 인생 신발입니다 !!',
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/EH0050-01-01.jpg',
-        },
-        {
-          id: 'reviewid',
-          date: '2022-01-17',
-          title: '별로네요',
-          content: '실물과 달라요',
-          img: 'https://image.adidas.co.kr/upload/prod/basic/source/H02795-01-01.jpg',
-        },
-      ],
     };
   },
+  created() {
+    this.getItemInfo();
+  },
   methods: {
-    secretId(id) {
-      return id.slice(0, 2) + '*'.repeat(id.length - 2);
+    async getItemInfo() {
+      const { data } = await ItemRepository.getPost(this.id);
+      this.product = data.item;
     },
     buy() {
       this.select = !this.select;
@@ -123,14 +97,18 @@ export default {
     ImgExists(review) {
       return Object.prototype.hasOwnProperty.call(review, 'img');
     },
-  },
-  computed: {
-    calSale() {
-      const discount = Math.round(this.product.price * (this.product.sale / 100));
-      const totalPrice = this.product.price - discount;
-      return totalPrice.toLocaleString();
+    doesReviewImgExists(review) {
+      return Object.prototype.hasOwnProperty.call(review, 'img');
     },
   },
+  computed: {
+    display_discount_rate() {
+      const rate = ((this.product.original_price - this.product.price)
+      / this.product.original_price) * 100;
+      return `${Number.prototype.toFixed.call(rate, 0)}%`;
+    },
+  },
+
 };
 </script>
 

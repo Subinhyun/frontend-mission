@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="item-list-header">
+    <div class="wish-list-header">
       <h1 data-test="shop-title" >{{ shop.title }}</h1>
     </div>
   </header>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'ItemListHeader',
+  name: 'WishListHeader',
   props: ['shop'],
   data() {
     return {
@@ -48,7 +48,7 @@ header {
   font-weight: bold;
 }
 
-.item-list-header {
+.wish-list-header {
   text-align: center;
   vertical-align: center;
 }

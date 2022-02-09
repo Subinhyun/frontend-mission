@@ -1,6 +1,6 @@
 <template>
 <nav>
-  <div class="item-list-nav">
+  <div class="wish-list-nav">
     <hr>
     <ul>
       <li data-test="home" ><router-link class="link" :to="{ name: 'Home'}">
@@ -18,13 +18,13 @@
 
 <script>
 export default {
-  name: 'ItemListNav',
+  name: 'WishListNav',
 };
 </script>
 
 <style>
 
-.item-list-nav {
+.wish-list-nav {
   position : fixed;
   bottom : 0px;
   height: 10%;

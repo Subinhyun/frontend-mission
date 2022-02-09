@@ -1,15 +1,10 @@
 <template>
 <main>
-  <router-link class="link"
-    :to="`/item/${ id }`">
-  <div class="item-list-item">
+  <div class="wish-list-item">
       <img data-test="product-img" id="product-img" :src="img">
-    <div v-if="isDiscounted">
-      <span data-test="product-sale" id="product-sale">
-        {{ displayDiscountRate }}
-      </span>
+    <div>
       <span data-test="product-price" id="price">
-        {{ priceWithComma }}
+        {{ price.toLocaleString() }}원
       </span><br>
     </div>
     <p data-test="product-name" id="product-name">{{ name }}</p>
@@ -19,20 +14,18 @@
       {{ description }}
     </p>
   </div>
-  </router-link>
 </main>
 </template>
 
 <script>
 export default {
-  name: 'ItemListItem',
+  name: 'Wish',
   props: {
     id: { type: Number, default: 1 },
     product_no: { type: String, default: '' },
     name: { type: String, default: '' },
     price: { type: Number, default: 0 },
-    img: { type: String, default: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/suit-1.png' },
-    original_price: { type: Number, default: -1 },
+    img: { type: String, default: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/suit-3.jpg' },
     description: { type: String, default: '' },
   },
   data() {
@@ -43,18 +36,6 @@ export default {
   methods: {
     heartMark() {
       this.heart = !this.heart;
-    },
-  },
-  computed: {
-    priceWithComma() {
-      return `${this.price.toLocaleString()}원`;
-    },
-    isDiscounted() {
-      return this.original_price !== -1;
-    },
-    displayDiscountRate() {
-      const rate = ((this.original_price - this.price) / this.original_price) * 100;
-      return `${rate.toFixed(0)}%`;
     },
   },
 };
@@ -71,7 +52,7 @@ main {
   margin-right: 5%;
 }
 
-.item-list-item {
+.wish-list-item {
   position: relative;
   box-shadow: 0 1px 5px rgba(0,0,0,0.2);
   border-radius: 4px;
@@ -95,7 +76,7 @@ body {
   margin-right: 5px;
 }
 
-#product-price {
+#price {
   float: left;
   margin-left: 5px;
   margin-right: 5px;
