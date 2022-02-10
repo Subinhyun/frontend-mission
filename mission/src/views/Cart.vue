@@ -12,6 +12,9 @@
       :img="product.image"
     />
     </div>
+    <div>
+        <button data-test="buy-btn">구매하러가기</button>
+    </div>
     <ItemNav />
   </div>
 </template>
@@ -65,6 +68,23 @@ export default {
   margin-bottom: 0;
   margin-left: 20px;
   color: #808080;
+}
+
+button {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+}
+
+button:active {
+    background-color: #ffbf00;
+}
+button:hover {
+  background-color: #ffbf00;
 }
 
 </style>
