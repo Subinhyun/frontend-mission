@@ -8,7 +8,7 @@ describe('ItemCartPage', () => {
     expect(wrapper.find('#item-cart-page').exists()).toBe(true);
   });
 
-  it('redners ItemCartPage', () => {
+  it('redners ItemCartPage button', () => {
     const wrapper = mount(ItemCartPage);
 
     expect(wrapper.find('[data-test="buy-btn"]').exists()).toBe(true);

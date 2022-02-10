@@ -80,9 +80,6 @@ button {
   border-radius: 4px;
 }
 
-button:active {
-    background-color: #ffbf00;
-}
 button:hover {
   background-color: #ffbf00;
 }
