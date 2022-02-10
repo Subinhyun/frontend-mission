@@ -4,8 +4,8 @@
     :to="`/item/${ id }`">
   <div class="item-list-item">
       <img data-test="product-img" id="product-img" :src="img">
-    <div v-if="isDiscounted">
-      <span data-test="product-sale" id="product-sale">
+    <div>
+      <span v-if="isDiscounted" data-test="product-sale" id="product-sale">
         {{ displayDiscountRate }}
       </span>
       <span data-test="product-price" id="price">
