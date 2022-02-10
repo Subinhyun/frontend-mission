@@ -13,7 +13,9 @@
     />
     </div>
     <div>
-        <button data-test="buy-btn">구매하러가기</button>
+        <button data-test="buy-btn">
+          <router-link class="link" :to="{ name: 'OrderPage'}">구매하러가기</router-link>
+        </button>
     </div>
     <ItemNav />
   </div>
