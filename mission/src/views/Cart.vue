@@ -1,8 +1,8 @@
 <template>
-  <div id="wish-list-page">
+  <div id="item-cart-page">
     <ItemHeader :shop="shop"/>
-    <p id="for-sale">찜한 상품</p>
-    <div id="wish-list">
+    <p id="for-sale">장바구니</p>
+    <div id="cart-list">
     <Item
       v-for="product in products"
       :key="product.product_no"
@@ -22,10 +22,10 @@ import ItemHeader from '@/components/ItemList/ItemHeader.vue';
 import ItemNav from '@/components/ItemList/ItemNav.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
-const WishRepository = Repository.get('wishs');
+const WishRepository = Repository.get('carts');
 
 export default {
-  name: 'WishListPage',
+  name: 'CartPage',
   components: {
     ItemNav,
     ItemHeader,
@@ -44,7 +44,7 @@ export default {
   methods: {
     async getWish() {
       const { data } = await WishRepository.get();
-      this.products = data.items;
+      this.products = data.cart_item;
     },
   },
 };
@@ -52,7 +52,7 @@ export default {
 
 <style>
 
-#wish-list {
+#cart-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   grid-gap: 15px;
