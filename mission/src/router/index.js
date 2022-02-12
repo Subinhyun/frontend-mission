@@ -32,6 +32,11 @@ const routes = [
     name: 'OrderPage',
     component: () => import('../views/Order.vue'),
   },
+  {
+    path: '/orderComplete',
+    name: 'OrderCompletePage',
+    component: () => import('../components/OrderComplete.vue'),
+  },
 ];
 
 export default createRouter({

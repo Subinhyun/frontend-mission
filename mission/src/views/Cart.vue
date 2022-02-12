@@ -22,13 +22,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Item from '@/components/ItemList/Item.vue';
 import ItemHeader from '@/components/ItemList/ItemHeader.vue';
 import ItemNav from '@/components/ItemList/ItemNav.vue';
-import Repository from '@/repositories/RepositoryFactory';
+// import Repository from '@/repositories/RepositoryFactory';
 
-const WishRepository = Repository.get('carts');
-
+// const WishRepository = Repository.get('carts');
+// import { mapGetters } from 'vuex';
 export default {
   name: 'CartPage',
   components: {
@@ -36,22 +37,36 @@ export default {
     ItemHeader,
     Item,
   },
-  data() {
-    return {
-      shop: { title: 'My shopping mall' },
-      products: [],
-      loading: true,
-    };
-  },
-  created() {
-    this.getWish();
-  },
-  methods: {
-    async getWish() {
-      const { data } = await WishRepository.get();
-      this.products = data.cart_item;
+  computed: {
+    ...mapState({
+      cart: (state) => state.cart.cart,
+      products: (state) => state.products,
+    }),
+    cartItems() {
+      return this.$store.getters.cartItems;
     },
   },
+  // data() {
+  //   return {
+  //     shop: { title: 'My shopping mall' },
+  //     products: [],
+  //     loading: true,
+  //   };
+  // },
+  // created() {
+  //   this.getWish();
+  // },
+  // methods: {
+  //   async getWish() {
+  //     const { data } = await WishRepository.get();
+  //     this.products = data.cart_item;
+  //   },
+  // },
+  // computed: {
+  //   ..mapGetters({
+  //     askItems: 'fetchedAsk',
+  //   }),
+  // },
 };
 </script>
 

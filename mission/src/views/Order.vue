@@ -1,6 +1,9 @@
 <template>
     <div id="item-order-page">
-      <p>주문하기</p>
+      <h1>주문하기</h1>
+      <span>상품 이름 포함</span>
+      <span>  </span>
+      <span> {{ totalPrice }} </span>
       <p>주문자명</p>
       <input data-test="input-name" type="text">
       <p>전화번호</p>
@@ -23,11 +26,14 @@
         <fa icon="money-bill"></fa><br>계좌이체
       </button>
       <br>
-      <button data-test="order-btn">주문하기</button>
+      <button data-test="order-btn">
+        <router-link class="link" :to="{ name: 'OrderCompletePage'}">주문하기</router-link>
+      </button>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ItemOrderPage',
@@ -36,10 +42,22 @@ export default {
       picked: '',
     };
   },
+  computed: {
+    ...mapGetters({
+      products: 'productCart',
+    }),
+    total() {
+      return this.$store.getters.totalPrice;
+    },
+  },
 };
 </script>
 
 <style>
+
+body {
+  padding-top: 0;
+}
 
 button {
   margin-top: 2.5%;
