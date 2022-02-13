@@ -1,5 +1,5 @@
 <template>
-  <div id="item-cart-page">
+  <div data-test="item-cart-page" id="item-cart-page">
     <ItemHeader/>
     <p id="for-sale">장바구니</p>
     <div id="cart-list">
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     cartItems() {
-      return this.$store.getters.cartItems;
+      return this.$store.getters.cartItem;
     },
   },
 };

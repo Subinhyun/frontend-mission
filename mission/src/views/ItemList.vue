@@ -1,5 +1,5 @@
 <template>
-  <div id="item-list-page">
+  <div data-test="item-list-page" id="item-list-page">
     <ItemHeader/>
     <p id="for-sale">판매 중인 상품</p>
     <div id="item-list">
