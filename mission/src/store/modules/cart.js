@@ -5,8 +5,8 @@ const state = {
       product_no: 'asdf1234',
       name: '핏이 좋은 수트',
       image: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/suit-1.png',
-      price: 198000.0,
-      original_price: 298000.0,
+      price: 198000,
+      original_price: 298000,
       description: '아주 잘 맞는 수트',
     },
     {
@@ -28,7 +28,7 @@ const getters = {
   totalPrice() {
     let total = 0;
     state.cart_item.forEach((item) => {
-      total += item.product.price;
+      total += item.price;
     });
     return total;
   },
@@ -47,9 +47,9 @@ const mutations = {
 //   },
 };
 const actions = {
-  addToCart: ({ commit }, { product, quantity }) => {
-    commit('ADD_TO_CART', { product, quantity });
-  },
+//   addToCart: ({ commit }, { product, quantity }) => {
+//     commit('ADD_TO_CART', { product, quantity });
+//   },
 };
 export default {
   state,

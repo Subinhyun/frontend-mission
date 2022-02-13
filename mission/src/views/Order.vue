@@ -45,11 +45,11 @@ export default {
   computed: {
     ...mapGetters(['cartItemCount', 'totalPrice']),
     cartItems() {
-      return this.$store.getters.cartItems;
+      return this.$store.getters.cartItem;
     },
-    // cartItemName() {
-    //   return this.cartItems[0].name;
-    // },
+    cartItemName() {
+      return this.cartItems[0].name;
+    },
   },
 };
 </script>
