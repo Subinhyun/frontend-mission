@@ -2,35 +2,40 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    items: [],
+    count: 0,
+    cart_item: [],
   },
   mutations: {
-    addToCart: (state, payload) => {
-      state.cartItem.push(payload);
+    ADD_TO_CART: (state, { product, quantity }) => {
+      const productInCart = state.cart_item.product.product_no === product.product_no;
+
+      if (productInCart) {
+        productInCart.quantity += quantity;
+        return;
+      }
+
+      state.cart_item.push({
+        product,
+        quantity,
+      });
     },
-    // removeItem: (state, payload) => {
-    //   state.cartItem.splice(payload, 1);
-    // },
-    // clearCart(state) {
-    //   state.cartItem.splice(0, state.cartItem.length);
-    // },
   },
   getters: {
-    // cartItems(state, rootState) {
-    //   return state.items.map((cartItem) => {
-    //     const product = rootState.products.items.find((product) => product.id === cartItem.id);
-    //     return {
-    //       name: product.name,
-    //       price: product.price,
-    //       quantity: cartItem.quantity,
-    //     };
-    //   });
+    // cartItem: (state) => state.cart_item,
+    // cartItemCount(state) {
+    //   return state.cart_item.length;
     // },
-    // cartTotal(state, getters) {
-    //   return getters.cartProducts.reduce((total,
-    //     product) => total + product.price * product.quantity, 0);
+    // totalPrice: (state) => {
+    //   let total = 0;
+    //   state.cart_item.forEach((item) => {
+    //     total += item.product.price;
+    //   });
+    //   return total;
     // },
   },
   actions: {
+    addToCart: ({ commit }, { product, quantity }) => {
+      commit('ADD_TO_CART', { product, quantity });
+    },
   },
 });

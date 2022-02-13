@@ -1,6 +1,6 @@
 <template>
   <div id="item-list-page">
-    <ItemHeader :shop="shop"/>
+    <ItemHeader/>
     <p id="for-sale">판매 중인 상품</p>
     <div id="item-list">
     <Item
@@ -33,7 +33,6 @@ export default {
   },
   data() {
     return {
-      shop: { title: 'My shopping mall' },
       products: [],
       loading: true,
     };

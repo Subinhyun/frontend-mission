@@ -54,7 +54,7 @@
   </div>
   <div class="buy">
     <hr>
-    <button id="buy-btn" data-test="buy-btn" @click="buy">
+    <button id="buy-btn" data-test="buy-btn" @click="addToCart">
       {{ `${product.price}원 구매` }}
     </button>
   </div>
@@ -84,6 +84,12 @@ export default {
     this.getItemInfo();
   },
   methods: {
+    addToCart() {
+      this.$store.dispatch('addToCart', {
+        product: this.product,
+        quantity: 1,
+      });
+    },
     async getItemInfo() {
       const { data } = await ItemRepository.getPost(this.id);
       this.product = data.item;

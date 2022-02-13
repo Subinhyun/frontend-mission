@@ -1,8 +1,8 @@
 <template>
     <div id="item-order-page">
       <h1>주문하기</h1>
-      <span>상품 이름 포함</span>
-      <span>  </span>
+      <span> {{ cartItemName }} 포함 </span>
+      <span> {{ cartItemCount }}건 </span>
       <span> {{ totalPrice }} </span>
       <p>주문자명</p>
       <input data-test="input-name" type="text">
@@ -43,12 +43,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      products: 'productCart',
-    }),
-    total() {
-      return this.$store.getters.totalPrice;
+    ...mapGetters(['cartItemCount', 'totalPrice']),
+    cartItems() {
+      return this.$store.getters.cartItems;
     },
+    // cartItemName() {
+    //   return this.cartItems[0].name;
+    // },
   },
 };
 </script>

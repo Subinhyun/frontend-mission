@@ -1,10 +1,10 @@
 <template>
   <div id="item-cart-page">
-    <ItemHeader :shop="shop"/>
+    <ItemHeader/>
     <p id="for-sale">장바구니</p>
     <div id="cart-list">
     <Item
-      v-for="product in products"
+      v-for="product in cartItems"
       :key="product.product_no"
       :name="product.name"
       :description="product.description"
@@ -22,14 +22,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+// import { mapState } from 'vuex';
 import Item from '@/components/ItemList/Item.vue';
 import ItemHeader from '@/components/ItemList/ItemHeader.vue';
 import ItemNav from '@/components/ItemList/ItemNav.vue';
-// import Repository from '@/repositories/RepositoryFactory';
 
-// const WishRepository = Repository.get('carts');
-// import { mapGetters } from 'vuex';
 export default {
   name: 'CartPage',
   components: {
@@ -38,35 +35,10 @@ export default {
     Item,
   },
   computed: {
-    ...mapState({
-      cart: (state) => state.cart.cart,
-      products: (state) => state.products,
-    }),
     cartItems() {
       return this.$store.getters.cartItems;
     },
   },
-  // data() {
-  //   return {
-  //     shop: { title: 'My shopping mall' },
-  //     products: [],
-  //     loading: true,
-  //   };
-  // },
-  // created() {
-  //   this.getWish();
-  // },
-  // methods: {
-  //   async getWish() {
-  //     const { data } = await WishRepository.get();
-  //     this.products = data.cart_item;
-  //   },
-  // },
-  // computed: {
-  //   ..mapGetters({
-  //     askItems: 'fetchedAsk',
-  //   }),
-  // },
 };
 </script>
 

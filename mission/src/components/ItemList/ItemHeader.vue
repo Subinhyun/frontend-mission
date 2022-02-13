@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="item-list-header">
-      <h1 data-test="shop-title" >{{ shop.title }}</h1>
+      <h1 data-test="shop-title" >My Shopping Mall</h1>
     </div>
   </header>
 </template>
@@ -9,7 +9,6 @@
 <script>
 export default {
   name: 'ItemListHeader',
-  props: ['shop'],
   data() {
     return {
       isScrolled: false,
