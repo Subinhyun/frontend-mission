@@ -22,6 +22,21 @@ const routes = [
     name: 'WishListPage',
     component: () => import('../views/WishList.vue'),
   },
+  {
+    path: '/cart',
+    name: 'CartPage',
+    component: () => import('../views/Cart.vue'),
+  },
+  {
+    path: '/order',
+    name: 'OrderPage',
+    component: () => import('../views/Order.vue'),
+  },
+  {
+    path: '/orderComplete',
+    name: 'OrderCompletePage',
+    component: () => import('../components/OrderComplete.vue'),
+  },
 ];
 
 export default createRouter({

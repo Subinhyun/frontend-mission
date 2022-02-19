@@ -1,49 +1,42 @@
 <template>
-  <div data-test="item-list-page" id="item-list-page">
+  <div data-test="item-cart-page" id="item-cart-page">
     <ItemHeader/>
-    <p id="for-sale">판매 중인 상품</p>
-    <div id="item-list">
+    <p id="for-sale">장바구니</p>
+    <div id="cart-list">
     <Item
-      v-for="product in products"
+      v-for="product in cartItems"
       :key="product.product_no"
       :name="product.name"
       :description="product.description"
       :price="product.price"
-      :original_price="product.original_price"
+      :img="product.image"
     />
+    </div>
+    <div>
+        <button data-test="buy-btn">
+          <router-link class="link" :to="{ name: 'OrderPage'}">구매하러가기</router-link>
+        </button>
     </div>
     <ItemNav />
   </div>
 </template>
 
 <script>
+// import { mapState } from 'vuex';
 import Item from '@/components/ItemList/Item.vue';
 import ItemHeader from '@/components/ItemList/ItemHeader.vue';
 import ItemNav from '@/components/ItemList/ItemNav.vue';
-import Repository from '@/repositories/RepositoryFactory';
-
-const ItemRepository = Repository.get('items');
 
 export default {
-  name: 'ItemListPage',
+  name: 'CartPage',
   components: {
     ItemNav,
     ItemHeader,
     Item,
   },
-  data() {
-    return {
-      products: [],
-      loading: true,
-    };
-  },
-  created() {
-    this.getItem();
-  },
-  methods: {
-    async getItem() {
-      const { data } = await ItemRepository.get();
-      this.products = data.items;
+  computed: {
+    cartItems() {
+      return this.$store.getters.cartItem;
     },
   },
 };
@@ -51,7 +44,7 @@ export default {
 
 <style>
 
-#item-list {
+#cart-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   grid-gap: 15px;
@@ -64,6 +57,20 @@ export default {
   margin-bottom: 0;
   margin-left: 20px;
   color: #808080;
+}
+
+button {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #ffbf00;
 }
 
 </style>

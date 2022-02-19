@@ -1,24 +1,25 @@
 <template>
   <div id="wish-list-page">
-    <WishHeader :shop="shop"/>
+    <ItemHeader :shop="shop"/>
     <p id="for-sale">찜한 상품</p>
     <div id="wish-list">
-    <Wish
+    <Item
       v-for="product in products"
       :key="product.product_no"
       :name="product.name"
       :description="product.description"
       :price="product.price"
+      :img="product.image"
     />
     </div>
-    <WishNav />
+    <ItemNav />
   </div>
 </template>
 
 <script>
-import Wish from '@/components/WishList/Wish.vue';
-import WishHeader from '@/components/WishList/WishHeader.vue';
-import WishNav from '@/components/WishList/WishNav.vue';
+import Item from '@/components/ItemList/Item.vue';
+import ItemHeader from '@/components/ItemList/ItemHeader.vue';
+import ItemNav from '@/components/ItemList/ItemNav.vue';
 import Repository from '@/repositories/RepositoryFactory';
 
 const WishRepository = Repository.get('wishs');
@@ -26,9 +27,9 @@ const WishRepository = Repository.get('wishs');
 export default {
   name: 'WishListPage',
   components: {
-    WishNav,
-    WishHeader,
-    Wish,
+    ItemNav,
+    ItemHeader,
+    Item,
   },
   data() {
     return {
